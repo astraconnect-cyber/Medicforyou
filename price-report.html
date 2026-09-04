@@ -339,7 +339,6 @@ MedPrice<span>NG</span>
 
 <div class="report-container">
 
-
 <!-- HEADER -->
 
 <div class="report-header">
@@ -370,7 +369,7 @@ Price variation insights based on available medicine records.
 <div class="demo-notice">
 
 <strong>Demo Environment:</strong>
-The figures below are illustrative placeholders. They are not live pharmacy prices and should not be used to make purchasing or medical decisions.
+The figures below are illustrative placeholders. They are demonstration estimates, not live pharmacy prices.
 
 </div>
 
@@ -383,7 +382,7 @@ The figures below are illustrative placeholders. They are not live pharmacy pric
 
 <small>ESTIMATED LOWEST BASKET</small>
 
-<h2>₦18,500</h2>
+<h2 id="lowestBasket">₦0</h2>
 
 <p>
 Lowest illustrative combined estimate.
@@ -396,7 +395,7 @@ Lowest illustrative combined estimate.
 
 <small>ESTIMATED HIGHEST BASKET</small>
 
-<h2>₦31,200</h2>
+<h2 id="highestBasket">₦0</h2>
 
 <p>
 Highest illustrative combined estimate.
@@ -409,7 +408,7 @@ Highest illustrative combined estimate.
 
 <small>POSSIBLE DIFFERENCE</small>
 
-<h2>₦12,700</h2>
+<h2 id="savingsAmount">₦0</h2>
 
 <p>
 Illustrative variation between records.
@@ -428,7 +427,7 @@ Illustrative variation between records.
 
 <small>POTENTIAL SAVINGS OPPORTUNITY</small>
 
-<h2>Up to ₦12,700</h2>
+<h2 id="savingsHeadline">₦0</h2>
 
 <p>
 Comparable medicine prices can vary significantly.
@@ -453,7 +452,7 @@ Always verify the exact medicine, strength and quantity.
 <h2>Medicine Price Comparison</h2>
 
 <p>
-Illustrative price ranges for demonstration purposes.
+Your entered medicines with illustrative price ranges.
 </p>
 
 </div>
@@ -469,85 +468,9 @@ Illustrative price ranges for demonstration purposes.
 </div>
 
 
-<div class="price-row">
+<!-- USER MEDICINES WILL APPEAR HERE -->
 
-<div class="medicine-title">
-
-Medicine A
-
-<small>500mg • Quantity 1</small>
-
-</div>
-
-<div class="price-low">
-₦4,500
-</div>
-
-<div class="price-high">
-₦7,200
-</div>
-
-<div>
-<span class="variation">
-60%
-</span>
-</div>
-
-</div>
-
-
-<div class="price-row">
-
-<div class="medicine-title">
-
-Medicine B
-
-<small>20mg • Quantity 1</small>
-
-</div>
-
-<div class="price-low">
-₦6,800
-</div>
-
-<div class="price-high">
-₦10,500
-</div>
-
-<div>
-<span class="variation">
-54%
-</span>
-</div>
-
-</div>
-
-
-<div class="price-row">
-
-<div class="medicine-title">
-
-Medicine C
-
-<small>1g • Quantity 1</small>
-
-</div>
-
-<div class="price-low">
-₦7,200
-</div>
-
-<div class="price-high">
-₦13,500
-</div>
-
-<div>
-<span class="variation">
-87%
-</span>
-</div>
-
-</div>
+<div id="medicineResults"></div>
 
 </section>
 
@@ -558,11 +481,9 @@ Medicine C
 
 <h3>✦ MedPrice Insight</h3>
 
-<p>
+<p id="insightText">
 
-This report highlights possible differences in recorded medicine prices.
-Price differences may result from manufacturer, brand, location,
-pharmacy supply costs and changes in availability.
+Enter medicines to generate a demonstration price comparison.
 
 </p>
 
@@ -591,10 +512,166 @@ MedPrice NG • Price intelligence platform • Demonstration data only
 
 </div>
 
-
 </div>
 
 </main>
+
+
+<script>
+
+/* GET MEDICINES SAVED FROM MANUAL ENTRY */
+
+const savedMedicines = JSON.parse(
+  localStorage.getItem("medpriceMedicines") || "[]"
+);
+
+const resultsContainer =
+document.getElementById("medicineResults");
+
+
+let totalLowest = 0;
+let totalHighest = 0;
+
+
+/* DISPLAY USER MEDICINES */
+
+if (savedMedicines.length > 0) {
+
+  savedMedicines.forEach(function(medicine, index) {
+
+    /*
+      DEMONSTRATION PRICE ENGINE
+      These are NOT real pharmacy prices.
+    */
+
+    const lowest =
+    2500 + (index * 1800);
+
+    const highest =
+    lowest + 3500 + (index * 700);
+
+    const variation =
+    Math.round(
+      ((highest - lowest) / lowest) * 100
+    );
+
+
+    totalLowest += lowest;
+    totalHighest += highest;
+
+
+    const row =
+    document.createElement("div");
+
+    row.className = "price-row";
+
+
+    row.innerHTML = `
+
+      <div class="medicine-title">
+
+        ${medicine.name}
+
+        <small>
+          ${medicine.strength || "Strength not specified"}
+          • Quantity ${medicine.quantity || "1"}
+        </small>
+
+      </div>
+
+
+      <div class="price-low">
+        ₦${lowest.toLocaleString()}
+      </div>
+
+
+      <div class="price-high">
+        ₦${highest.toLocaleString()}
+      </div>
+
+
+      <div>
+
+        <span class="variation">
+          ${variation}%
+        </span>
+
+      </div>
+
+    `;
+
+
+    resultsContainer.appendChild(row);
+
+  });
+
+
+  /* UPDATE SUMMARY */
+
+  const savings =
+  totalHighest - totalLowest;
+
+
+  document.getElementById("lowestBasket")
+  .textContent =
+  "₦" + totalLowest.toLocaleString();
+
+
+  document.getElementById("highestBasket")
+  .textContent =
+  "₦" + totalHighest.toLocaleString();
+
+
+  document.getElementById("savingsAmount")
+  .textContent =
+  "₦" + savings.toLocaleString();
+
+
+  document.getElementById("savingsHeadline")
+  .textContent =
+  "Up to ₦" + savings.toLocaleString();
+
+
+  document.getElementById("insightText")
+  .textContent =
+  "Based on the demonstration data, the combined price range for the medicines entered shows a possible difference of ₦" +
+  savings.toLocaleString() +
+  ". Real MedPrice results will use verified medicine and pharmacy price records.";
+
+}
+
+else {
+
+  resultsContainer.innerHTML = `
+
+    <div style="
+      padding:35px;
+      text-align:center;
+      color:#718078;
+    ">
+
+      No medicines found.
+
+      <br><br>
+
+      <a href="manual-entry.html"
+      style="
+        color:#00a86b;
+        font-weight:bold;
+        text-decoration:none;
+      ">
+
+        ← Enter Medicines
+
+      </a>
+
+    </div>
+
+  `;
+
+}
+
+</script>
 
 </body>
   </html>
