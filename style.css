@@ -552,3 +552,17 @@ footer small {
 .file-button:hover {
   background: #f2f6f4;
   }
+.manual-button {
+  display: inline-block;
+  background: #f0f7f3;
+  color: #08784e;
+  padding: 15px 22px;
+  border-radius: 10px;
+  font-weight: bold;
+  text-decoration: none;
+  border: 1px solid #cce9da;
+}
+
+.manual-button:hover {
+  background: #e4f4eb;
+  }
