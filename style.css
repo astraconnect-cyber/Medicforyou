@@ -531,3 +531,24 @@ footer small {
   }
 
 }
+.upload-options {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.file-button {
+  display: inline-block;
+  background: white;
+  color: #071a14;
+  padding: 15px 22px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  border: 1px solid #cfd9d4;
+}
+
+.file-button:hover {
+  background: #f2f6f4;
+  }
