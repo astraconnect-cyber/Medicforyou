@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Price Intelligence Report | MedPrice NG</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+body {
+  background: #f5f8f6;
+}
+
+.report-page {
+  padding: 55px 7%;
+  min-height: calc(100vh - 80px);
+}
+
+.report-container {
+  max-width: 1100px;
+  margin: auto;
+}
+
+/* HEADER */
+
+.report-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 35px;
+}
+
+.report-header h1 {
+  font-size: 40px;
+  letter-spacing: -1.5px;
+}
+
+.report-header p {
+  color: #718078;
+  margin-top: 10px;
+}
+
+.report-status {
+  background: #e8f8ef;
+  color: #078452;
+  padding: 9px 14px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+/* WARNING */
+
+.demo-notice {
+  background: #fff8e8;
+  border: 1px solid #f1dfac;
+  color: #80631f;
+  padding: 16px 20px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* SUMMARY */
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-bottom: 25px;
+}
+
+.summary-card {
+  background: white;
+  border: 1px solid #e1e8e4;
+  padding: 25px;
+  border-radius: 16px;
+}
+
+.summary-card small {
+  color: #84918b;
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.summary-card h2 {
+  font-size: 32px;
+  margin: 12px 0 8px;
+}
+
+.summary-card p {
+  color: #7c8983;
+  font-size: 12px;
+}
+
+.lowest h2 {
+  color: #00a86b;
+}
+
+.highest h2 {
+  color: #d85d4b;
+}
+
+/* SAVINGS */
+
+.savings-card {
+  background: #071a14;
+  color: white;
+  border-radius: 18px;
+  padding: 30px;
+  margin-bottom: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.savings-card small {
+  color: #8ea299;
+  letter-spacing: 1px;
+  font-size: 10px;
+}
+
+.savings-card h2 {
+  font-size: 36px;
+  margin-top: 10px;
+}
+
+.savings-card p {
+  color: #a9b9b2;
+  margin-top: 8px;
+  font-size: 13px;
+}
+
+.savings-icon {
+  font-size: 55px;
+}
+
+/* COMPARISON */
+
+.comparison-card {
+  background: white;
+  border: 1px solid #e0e7e3;
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.comparison-header {
+  padding: 25px;
+  border-bottom: 1px solid #edf1ef;
+}
+
+.comparison-header h2 {
+  font-size: 20px;
+}
+
+.comparison-header p {
+  color: #84918b;
+  font-size: 12px;
+  margin-top: 7px;
+}
+
+.price-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 15px;
+  padding: 20px 25px;
+  align-items: center;
+  border-bottom: 1px solid #edf1ef;
+}
+
+.price-row.header {
+  background: #f7faf8;
+  font-size: 10px;
+  font-weight: bold;
+  color: #84918b;
+  letter-spacing: 1px;
+}
+
+.medicine-title {
+  font-weight: bold;
+}
+
+.medicine-title small {
+  display: block;
+  color: #89958f;
+  font-weight: normal;
+  margin-top: 5px;
+}
+
+.price-low {
+  color: #009a62;
+  font-weight: bold;
+}
+
+.price-high {
+  color: #d85d4b;
+  font-weight: bold;
+}
+
+.variation {
+  background: #fff8e8;
+  color: #b17d18;
+  padding: 6px 10px;
+  border-radius: 20px;
+  display: inline-block;
+  font-size: 11px;
+}
+
+/* INSIGHT */
+
+.insight-card {
+  margin-top: 25px;
+  background: #eaf7f0;
+  border: 1px solid #cfe9db;
+  border-radius: 16px;
+  padding: 25px;
+}
+
+.insight-card h3 {
+  color: #08784e;
+}
+
+.insight-card p {
+  color: #557066;
+  font-size: 13px;
+  line-height: 1.6;
+  margin-top: 10px;
+}
+
+/* ACTIONS */
+
+.report-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.primary-action {
+  flex: 1;
+  border: none;
+  background: #00a86b;
+  color: white;
+  padding: 16px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.secondary-action {
+  flex: 1;
+  border: 1px solid #dce5e0;
+  background: white;
+  color: #17362b;
+  padding: 16px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* FOOTER */
+
+.report-footer {
+  text-align: center;
+  color: #98a39e;
+  font-size: 11px;
+  margin-top: 35px;
+  padding-bottom: 20px;
+}
+
+/* MOBILE */
+
+@media(max-width: 700px) {
+
+  .report-page {
+    padding: 35px 5%;
+  }
+
+  .report-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .report-header h1 {
+    font-size: 31px;
+  }
+
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .savings-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .price-row {
+    grid-template-columns: 1.5fr 1fr 1fr;
+    font-size: 12px;
+  }
+
+  .price-row div:nth-child(4) {
+    display: none;
+  }
+
+  .report-actions {
+    flex-direction: column;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<nav class="navbar">
+
+<a href="index.html" class="logo">
+<span class="logo-icon">✚</span>
+MedPrice<span>NG</span>
+</a>
+
+<div class="nav-links">
+<a href="index.html">Home</a>
+<a href="check-price.html">New Search</a>
+<a href="dashboard.html">Intelligence</a>
+</div>
+
+</nav>
+
+
+<main class="report-page">
+
+<div class="report-container">
+
+
+<!-- HEADER -->
+
+<div class="report-header">
+
+<div>
+
+<div class="section-label">
+MEDPRICE INTELLIGENCE REPORT
+</div>
+
+<h1>Your Medicine Price Report</h1>
+
+<p>
+Price variation insights based on available medicine records.
+</p>
+
+</div>
+
+<div class="report-status">
+● ANALYSIS COMPLETE
+</div>
+
+</div>
+
+
+<!-- DEMO WARNING -->
+
+<div class="demo-notice">
+
+<strong>Demo Environment:</strong>
+The figures below are illustrative placeholders. They are not live pharmacy prices and should not be used to make purchasing or medical decisions.
+
+</div>
+
+
+<!-- SUMMARY -->
+
+<section class="summary-grid">
+
+<div class="summary-card">
+
+<small>ESTIMATED LOWEST BASKET</small>
+
+<h2>₦18,500</h2>
+
+<p>
+Lowest illustrative combined estimate.
+</p>
+
+</div>
+
+
+<div class="summary-card highest">
+
+<small>ESTIMATED HIGHEST BASKET</small>
+
+<h2>₦31,200</h2>
+
+<p>
+Highest illustrative combined estimate.
+</p>
+
+</div>
+
+
+<div class="summary-card lowest">
+
+<small>POSSIBLE DIFFERENCE</small>
+
+<h2>₦12,700</h2>
+
+<p>
+Illustrative variation between records.
+</p>
+
+</div>
+
+</section>
+
+
+<!-- SAVINGS -->
+
+<section class="savings-card">
+
+<div>
+
+<small>POTENTIAL SAVINGS OPPORTUNITY</small>
+
+<h2>Up to ₦12,700</h2>
+
+<p>
+Comparable medicine prices can vary significantly.
+Always verify the exact medicine, strength and quantity.
+</p>
+
+</div>
+
+<div class="savings-icon">
+💰
+</div>
+
+</section>
+
+
+<!-- COMPARISON -->
+
+<section class="comparison-card">
+
+<div class="comparison-header">
+
+<h2>Medicine Price Comparison</h2>
+
+<p>
+Illustrative price ranges for demonstration purposes.
+</p>
+
+</div>
+
+
+<div class="price-row header">
+
+<div>MEDICINE</div>
+<div>LOWEST</div>
+<div>HIGHEST</div>
+<div>VARIATION</div>
+
+</div>
+
+
+<div class="price-row">
+
+<div class="medicine-title">
+
+Medicine A
+
+<small>500mg • Quantity 1</small>
+
+</div>
+
+<div class="price-low">
+₦4,500
+</div>
+
+<div class="price-high">
+₦7,200
+</div>
+
+<div>
+<span class="variation">
+60%
+</span>
+</div>
+
+</div>
+
+
+<div class="price-row">
+
+<div class="medicine-title">
+
+Medicine B
+
+<small>20mg • Quantity 1</small>
+
+</div>
+
+<div class="price-low">
+₦6,800
+</div>
+
+<div class="price-high">
+₦10,500
+</div>
+
+<div>
+<span class="variation">
+54%
+</span>
+</div>
+
+</div>
+
+
+<div class="price-row">
+
+<div class="medicine-title">
+
+Medicine C
+
+<small>1g • Quantity 1</small>
+
+</div>
+
+<div class="price-low">
+₦7,200
+</div>
+
+<div class="price-high">
+₦13,500
+</div>
+
+<div>
+<span class="variation">
+87%
+</span>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- INSIGHT -->
+
+<section class="insight-card">
+
+<h3>✦ MedPrice Insight</h3>
+
+<p>
+
+This report highlights possible differences in recorded medicine prices.
+Price differences may result from manufacturer, brand, location,
+pharmacy supply costs and changes in availability.
+
+</p>
+
+</section>
+
+
+<!-- ACTIONS -->
+
+<div class="report-actions">
+
+<button class="primary-action">
+Find Verified Pharmacies →
+</button>
+
+<button class="secondary-action"
+onclick="window.print()">
+Download / Print Report
+</button>
+
+</div>
+
+
+<div class="report-footer">
+
+MedPrice NG • Price intelligence platform • Demonstration data only
+
+</div>
+
+
+</div>
+
+</main>
+
+</body>
+  </html>
