@@ -4,135 +4,385 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Check Prescription Price | MedPrice NG</title>
+<title>Prescription Scanner | MedPrice NG</title>
 
 <link rel="stylesheet" href="style.css">
 
 <style>
 
-.check-page {
-  min-height: 100vh;
-  padding: 60px 7%;
-  background: #f7f9fc;
+body {
+  background: #f5f8f6;
 }
 
-.check-header {
+/* PAGE */
+
+.scanner-page {
+  min-height: calc(100vh - 78px);
+  padding: 55px 7%;
+}
+
+/* HEADER */
+
+.scanner-header {
   text-align: center;
   max-width: 700px;
-  margin: auto;
+  margin: 0 auto 40px;
 }
 
-.check-header h1 {
+.scanner-header h1 {
   font-size: 42px;
-  margin-bottom: 15px;
+  letter-spacing: -1.5px;
 }
 
-.check-header p {
-  color: #64748b;
+.scanner-header p {
+  color: #708078;
+  margin-top: 15px;
   line-height: 1.6;
 }
 
-.upload-box {
-  max-width: 650px;
-  margin: 40px auto;
+/* UPLOAD */
+
+.upload-card {
+  max-width: 680px;
+  margin: auto;
   background: white;
-  border-radius: 20px;
-  padding: 40px;
+  border: 1px solid #dfe8e3;
+  border-radius: 22px;
+  padding: 45px;
   text-align: center;
-  border: 2px dashed #16a34a;
 }
 
-.camera-icon {
-  font-size: 70px;
-  margin-bottom: 20px;
+.upload-zone {
+  border: 2px dashed #9ed9bc;
+  background: #f6fcf8;
+  border-radius: 16px;
+  padding: 55px 25px;
 }
 
-.upload-box h2 {
-  margin-bottom: 10px;
+.camera-circle {
+  width: 70px;
+  height: 70px;
+  background: #e3f7eb;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  margin: auto auto 20px;
 }
 
-.upload-box p {
-  color: #64748b;
-  margin-bottom: 25px;
+.upload-zone h2 {
+  font-size: 22px;
 }
 
-.upload-btn {
+.upload-zone p {
+  color: #718078;
+  margin: 10px auto 25px;
+  font-size: 14px;
+}
+
+.upload-button {
   display: inline-block;
-  background: #16a34a;
+  background: #00a86b;
   color: white;
-  padding: 16px 25px;
+  padding: 15px 22px;
   border-radius: 10px;
-  cursor: pointer;
   font-weight: bold;
-}
-
-.upload-btn:hover {
-  background: #15803d;
+  cursor: pointer;
 }
 
 #prescriptionImage {
   display: none;
 }
 
-.preview-container {
+.security-note {
+  margin-top: 25px;
+  font-size: 12px;
+  color: #89968f;
+}
+
+/* PREVIEW */
+
+.preview-section {
   display: none;
-  max-width: 650px;
-  margin: 30px auto;
-  text-align: center;
+  max-width: 850px;
+  margin: auto;
 }
 
-.preview-container img {
-  max-width: 100%;
+.preview-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+}
+
+.image-card,
+.info-card {
+  background: white;
+  border: 1px solid #e0e7e3;
+  border-radius: 18px;
+  padding: 25px;
+}
+
+.card-label {
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  color: #819089;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.image-preview {
+  width: 100%;
   max-height: 400px;
-  border-radius: 15px;
+  object-fit: contain;
+  border-radius: 12px;
+  background: #f4f6f5;
 }
 
-.analyse-btn {
-  margin-top: 20px;
-  background: #052e16;
-  color: white;
+.info-card h2 {
+  font-size: 30px;
+  line-height: 1.15;
+}
+
+.info-card p {
+  color: #718078;
+  line-height: 1.6;
+  margin: 18px 0 30px;
+}
+
+.analyse-button {
+  width: 100%;
   border: none;
-  padding: 16px 30px;
+  background: #071a14;
+  color: white;
+  padding: 17px;
   border-radius: 10px;
-  font-size: 16px;
+  font-weight: bold;
+  font-size: 15px;
   cursor: pointer;
 }
 
-.analyse-btn:hover {
-  background: #14532d;
+/* ANALYSIS */
+
+.analysis-section {
+  display: none;
+  max-width: 850px;
+  margin: auto;
 }
 
-.result-box {
-  display: none;
-  max-width: 750px;
-  margin: 40px auto;
+.analysis-card {
   background: white;
-  padding: 35px;
+  border-radius: 22px;
+  border: 1px solid #e0e7e3;
+  padding: 40px;
+}
+
+.analysis-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.analysis-top h2 {
+  font-size: 28px;
+}
+
+.live-analysis {
+  color: #00a86b;
+  background: #e8f8ef;
+  padding: 8px 12px;
   border-radius: 20px;
-}
-
-.result-box h2 {
-  text-align: center;
-  margin-bottom: 25px;
-}
-
-.loading {
-  display: none;
-  text-align: center;
-  margin-top: 25px;
-  color: #16a34a;
+  font-size: 11px;
   font-weight: bold;
 }
 
-.notice {
-  max-width: 650px;
+/* SCANNER */
+
+.scan-area {
+  height: 260px;
+  margin: 30px 0;
+  background: #071a14;
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.scan-area img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0.6;
+}
+
+.scan-line {
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  background: #00e68a;
+  top: 0;
+  box-shadow: 0 0 15px #00e68a;
+  animation: scan 2s linear infinite;
+}
+
+@keyframes scan {
+  0% { top: 0; }
+  100% { top: 100%; }
+}
+
+/* PROCESSING */
+
+.processing-list {
+  margin-top: 25px;
+}
+
+.process-item {
+  padding: 16px 0;
+  border-bottom: 1px solid #edf1ef;
+  color: #8a9690;
+  display: flex;
+  justify-content: space-between;
+}
+
+.process-item.active {
+  color: #15231d;
+  font-weight: bold;
+}
+
+.process-item.complete {
+  color: #00a86b;
+}
+
+/* RESULTS */
+
+.results-section {
+  display: none;
+  max-width: 900px;
   margin: auto;
-  background: #fff7ed;
-  border-left: 4px solid #f97316;
-  padding: 15px;
-  border-radius: 8px;
-  font-size: 14px;
-  color: #7c2d12;
+}
+
+.results-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.results-header h1 {
+  font-size: 38px;
+}
+
+.results-header p {
+  color: #718078;
+  margin-top: 12px;
+}
+
+/* MEDICINE TABLE */
+
+.medicine-card {
+  background: white;
+  border-radius: 18px;
+  border: 1px solid #e0e7e3;
+  overflow: hidden;
+}
+
+.medicine-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 80px;
+  gap: 15px;
+  padding: 20px 25px;
+  border-bottom: 1px solid #edf1ef;
+  align-items: center;
+}
+
+.medicine-row.header {
+  background: #f7faf8;
+  font-size: 10px;
+  font-weight: bold;
+  color: #829089;
+  letter-spacing: 1px;
+}
+
+.medicine-name {
+  font-weight: bold;
+}
+
+.confidence {
+  background: #e8f8ef;
+  color: #008653;
+  padding: 6px 9px;
+  border-radius: 20px;
+  font-size: 11px;
+  display: inline-block;
+}
+
+.edit-button {
+  border: 1px solid #dce5e0;
+  background: white;
+  padding: 8px;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+.confirm-area {
+  margin-top: 25px;
+  background: #071a14;
+  color: white;
+  padding: 30px;
+  border-radius: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.confirm-area p {
+  color: #a6b8af;
+  font-size: 13px;
+  margin-top: 7px;
+}
+
+.confirm-button {
+  border: none;
+  background: #00a86b;
+  color: white;
+  padding: 15px 20px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* MOBILE */
+
+@media(max-width: 700px) {
+
+  .scanner-page {
+    padding: 35px 5%;
+  }
+
+  .scanner-header h1 {
+    font-size: 32px;
+  }
+
+  .upload-card {
+    padding: 20px;
+  }
+
+  .preview-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .medicine-row {
+    grid-template-columns: 1.5fr 1fr 70px;
+    font-size: 13px;
+  }
+
+  .medicine-row div:nth-child(3) {
+    display: none;
+  }
+
+  .confirm-area {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
 }
 
 </style>
@@ -140,168 +390,374 @@
 
 <body>
 
-<nav>
-  <div class="logo">
-    💊 MedPrice <span>NG</span>
-  </div>
+<nav class="navbar">
+
+  <a href="index.html" class="logo">
+    <span class="logo-icon">✚</span>
+    MedPrice<span>NG</span>
+  </a>
 
   <div class="nav-links">
     <a href="index.html">Home</a>
-    <a href="check-price.html">Check Price</a>
-    <a href="pharmacy.html">For Pharmacies</a>
+    <a href="dashboard.html">Intelligence</a>
   </div>
+
 </nav>
 
 
-<section class="check-page">
+<main class="scanner-page">
 
-  <div class="check-header">
+<!-- UPLOAD SCREEN -->
 
-    <h1>📸 Check Your Prescription Price</h1>
+<section id="uploadSection">
+
+  <div class="scanner-header">
+
+    <div class="section-label">PRESCRIPTION INTELLIGENCE</div>
+
+    <h1>Scan a prescription.</h1>
 
     <p>
-      Snap or upload a clear picture of your prescription.
-      We'll help identify the medicines and estimate their prices.
+      Upload a clear prescription image. Extracted medicine details should
+      be reviewed and confirmed before any price comparison.
     </p>
 
   </div>
 
 
-  <div class="upload-box">
+  <div class="upload-card">
 
-    <div class="camera-icon">📷</div>
+    <div class="upload-zone">
 
-    <h2>Upload Prescription</h2>
+      <div class="camera-circle">📸</div>
 
-    <p>
-      Take a clear picture or choose an image from your phone.
-    </p>
+      <h2>Capture Prescription</h2>
 
-    <label for="prescriptionImage" class="upload-btn">
-      📸 Snap / Upload Prescription
-    </label>
+      <p>
+        Take a photo or upload an existing image.
+      </p>
 
-    <input
-      type="file"
-      id="prescriptionImage"
-      accept="image/*"
-      capture="environment"
-    >
+      <label for="prescriptionImage" class="upload-button">
+        Open Camera / Upload
+      </label>
 
-  </div>
+      <input
+        type="file"
+        id="prescriptionImage"
+        accept="image/*"
+        capture="environment"
+      >
 
-
-  <div class="preview-container" id="previewContainer">
-
-    <h3>Your Prescription</h3>
-
-    <br>
-
-    <img id="imagePreview">
-
-    <br>
-
-    <button class="analyse-btn" onclick="analysePrescription()">
-      🤖 Analyse Prescription & Check Prices
-    </button>
-
-    <div class="loading" id="loading">
-      ⏳ Analysing prescription...
     </div>
 
-  </div>
-
-
-  <div class="result-box" id="resultBox">
-
-    <h2>💊 Prescription Analysis</h2>
-
-    <p id="resultText">
-      Your prescription results will appear here.
+    <p class="security-note">
+      🔒 Do not upload prescriptions containing information you are not authorized to share.
     </p>
-
-  </div>
-
-
-  <div class="notice">
-
-    ⚠️ <strong>Important:</strong> MedPrice NG provides medicine price
-    information and does not prescribe medication, diagnose conditions,
-    or recommend changing prescribed medicines. Unclear prescriptions
-    should be reviewed by a licensed pharmacist.
 
   </div>
 
 </section>
 
 
+<!-- PREVIEW SCREEN -->
+
+<section class="preview-section" id="previewSection">
+
+  <div class="preview-grid">
+
+    <div class="image-card">
+
+      <div class="card-label">PRESCRIPTION IMAGE</div>
+
+      <img id="imagePreview" class="image-preview">
+
+    </div>
+
+
+    <div class="info-card">
+
+      <div class="card-label">READY FOR ANALYSIS</div>
+
+      <h2>Let's understand your prescription.</h2>
+
+      <p>
+        MedPrice will extract potential medicine names and details.
+        You will be asked to confirm the results before price matching.
+      </p>
+
+      <button class="analyse-button" onclick="startAnalysis()">
+        ✦ Analyse Prescription
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ANALYSIS SCREEN -->
+
+<section class="analysis-section" id="analysisSection">
+
+  <div class="analysis-card">
+
+    <div class="analysis-top">
+
+      <div>
+        <div class="section-label">MEDPRICE ENGINE</div>
+        <h2>Analysing prescription</h2>
+      </div>
+
+      <div class="live-analysis">
+        ● PROCESSING
+      </div>
+
+    </div>
+
+
+    <div class="scan-area">
+
+      <img id="scanImage">
+
+      <div class="scan-line"></div>
+
+    </div>
+
+
+    <div class="processing-list">
+
+      <div class="process-item" id="step1">
+        <span>Reading prescription image</span>
+        <span>○</span>
+      </div>
+
+      <div class="process-item" id="step2">
+        <span>Detecting medicine names</span>
+        <span>○</span>
+      </div>
+
+      <div class="process-item" id="step3">
+        <span>Extracting strength and dosage</span>
+        <span>○</span>
+      </div>
+
+      <div class="process-item" id="step4">
+        <span>Preparing medicines for confirmation</span>
+        <span>○</span>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- RESULTS -->
+
+<section class="results-section" id="resultsSection">
+
+  <div class="results-header">
+
+    <div class="section-label">EXTRACTION RESULTS</div>
+
+    <h1>Please confirm detected medicines</h1>
+
+    <p>
+      Review the extracted information carefully. Correct anything unclear
+      before continuing to price comparison.
+    </p>
+
+  </div>
+
+
+  <div class="medicine-card">
+
+    <div class="medicine-row header">
+
+      <div>MEDICINE</div>
+      <div>STRENGTH</div>
+      <div>AI CONFIDENCE</div>
+      <div>EDIT</div>
+
+    </div>
+
+
+    <!-- DEMO DATA -->
+
+    <div class="medicine-row">
+
+      <div class="medicine-name">Medicine A</div>
+      <div>500mg</div>
+      <div><span class="confidence">Demo</span></div>
+
+      <button class="edit-button">Edit</button>
+
+    </div>
+
+
+    <div class="medicine-row">
+
+      <div class="medicine-name">Medicine B</div>
+      <div>20mg</div>
+      <div><span class="confidence">Demo</span></div>
+
+      <button class="edit-button">Edit</button>
+
+    </div>
+
+
+    <div class="medicine-row">
+
+      <div class="medicine-name">Medicine C</div>
+      <div>1g</div>
+      <div><span class="confidence">Demo</span></div>
+
+      <button class="edit-button">Edit</button>
+
+    </div>
+
+  </div>
+
+
+  <div class="confirm-area">
+
+    <div>
+      <h2>Ready to check prices?</h2>
+
+      <p>
+        Confirmed medicines will be matched against available price records.
+      </p>
+    </div>
+
+    <button class="confirm-button" onclick="showPriceReport()">
+      Confirm & Check Prices →
+    </button>
+
+  </div>
+
+</section>
+
+</main>
+
+
 <script>
 
-const prescriptionImage =
-document.getElementById("prescriptionImage");
-
-const imagePreview =
-document.getElementById("imagePreview");
-
-const previewContainer =
-document.getElementById("previewContainer");
+let uploadedImageURL = "";
 
 
-prescriptionImage.addEventListener("change", function() {
+/* IMAGE UPLOAD */
 
-  const file = this.files[0];
+document
+.getElementById("prescriptionImage")
+.addEventListener("change", function(event) {
 
-  if (file) {
+  const file = event.target.files[0];
 
-    imagePreview.src =
-    URL.createObjectURL(file);
+  if (!file) return;
 
-    previewContainer.style.display = "block";
+  uploadedImageURL = URL.createObjectURL(file);
 
-  }
+  document.getElementById("imagePreview").src =
+  uploadedImageURL;
+
+  document.getElementById("scanImage").src =
+  uploadedImageURL;
+
+
+  document.getElementById("uploadSection")
+  .style.display = "none";
+
+  document.getElementById("previewSection")
+  .style.display = "block";
 
 });
 
 
-function analysePrescription() {
+/* START ANALYSIS */
 
-  document.getElementById("loading").style.display = "block";
+function startAnalysis() {
 
-  /*
-  NEXT VERSION:
+  document.getElementById("previewSection")
+  .style.display = "none";
 
-  The uploaded image will be sent to:
+  document.getElementById("analysisSection")
+  .style.display = "block";
 
-  1. OCR / AI service
-  2. Medicine identification system
-  3. Firebase medicine price database
-  4. Pharmacy comparison system
 
-  */
+  const steps = [
 
-  setTimeout(function() {
+    "step1",
+    "step2",
+    "step3",
+    "step4"
 
-    document.getElementById("loading").style.display = "none";
+  ];
 
-    document.getElementById("resultBox").style.display = "block";
 
-    document.getElementById("resultText").innerHTML = `
+  let current = 0;
 
-      <strong>Prescription uploaded successfully.</strong>
 
-      <br><br>
+  function runStep() {
 
-      🤖 AI prescription analysis will be connected in the next stage.
+    if (current > 0) {
 
-      <br><br>
+      const previous =
+      document.getElementById(steps[current - 1]);
 
-      💊 The system will identify medicines, strength,
-      dosage and quantity before checking participating
-      pharmacy prices.
+      previous.classList.remove("active");
 
-    `;
+      previous.classList.add("complete");
 
-  }, 1500);
+      previous.querySelector("span:last-child")
+      .innerHTML = "✓";
+
+    }
+
+
+    if (current < steps.length) {
+
+      const step =
+      document.getElementById(steps[current]);
+
+      step.classList.add("active");
+
+      current++;
+
+      setTimeout(runStep, 1300);
+
+    }
+
+    else {
+
+      setTimeout(function() {
+
+        document.getElementById("analysisSection")
+        .style.display = "none";
+
+        document.getElementById("resultsSection")
+        .style.display = "block";
+
+      }, 700);
+
+    }
+
+  }
+
+
+  runStep();
+
+}
+
+
+/* PRICE REPORT */
+
+function showPriceReport() {
+
+  alert(
+    "Next: MedPrice will match confirmed medicines against verified price records."
+  );
 
 }
 
