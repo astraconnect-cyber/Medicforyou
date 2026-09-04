@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MedPrice Intelligence Dashboard</title>
+
+<link rel="stylesheet" href="dashboard.css">
+
+</head>
+
+<body>
+
+<div class="app">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <div class="brand">
+      <div class="brand-icon">✚</div>
+      <div>
+        <strong>MedPrice</strong>
+        <span>INTELLIGENCE</span>
+      </div>
+    </div>
+
+    <div class="workspace">
+      ENTERPRISE WORKSPACE
+    </div>
+
+    <nav class="side-nav">
+
+      <a href="#" class="active">
+        <span>▦</span> Overview
+      </a>
+
+      <a href="#">
+        <span>◫</span> Prescriptions
+      </a>
+
+      <a href="#">
+        <span>₦</span> Price Intelligence
+      </a>
+
+      <a href="#">
+        <span>⌁</span> Market Trends
+      </a>
+
+      <a href="#">
+        <span>⌖</span> Geographic Insights
+      </a>
+
+      <a href="#">
+        <span>⚠</span> Price Alerts
+      </a>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+
+      <div class="system-status">
+        <span class="status-dot"></span>
+        Intelligence Engine
+        <small>Demo Environment</small>
+      </div>
+
+      <a href="index.html" class="back-home">
+        ← Back to MedPrice NG
+      </a>
+
+    </div>
+
+  </aside>
+
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <header class="topbar">
+
+      <div>
+        <p class="breadcrumb">
+          MEDPRICE INTELLIGENCE / OVERVIEW
+        </p>
+
+        <h1>Market Intelligence</h1>
+
+        <p class="subtitle">
+          Medication affordability and price variation insights.
+        </p>
+      </div>
+
+      <div class="profile">
+        <div class="demo-badge">DEMO</div>
+        <div class="avatar">MP</div>
+      </div>
+
+    </header>
+
+
+    <!-- STATS -->
+
+    <section class="stats-grid">
+
+      <div class="stat-card">
+
+        <div class="stat-label">
+          PRESCRIPTIONS ANALYZED
+          <span>↗</span>
+        </div>
+
+        <h2>12,847</h2>
+
+        <p class="positive">
+          ↑ 18.4% <span>vs previous period</span>
+        </p>
+
+      </div>
+
+
+      <div class="stat-card">
+
+        <div class="stat-label">
+          MEDICINES TRACKED
+          <span>◈</span>
+        </div>
+
+        <h2>2,431</h2>
+
+        <p class="neutral">
+          Across verified records
+        </p>
+
+      </div>
+
+
+      <div class="stat-card">
+
+        <div class="stat-label">
+          PRICE OBSERVATIONS
+          <span>◉</span>
+        </div>
+
+        <h2>48,291</h2>
+
+        <p class="positive">
+          ↑ 6.8% <span>new observations</span>
+        </p>
+
+      </div>
+
+
+      <div class="stat-card">
+
+        <div class="stat-label">
+          ACTIVE PRICE ALERTS
+          <span>⚠</span>
+        </div>
+
+        <h2 class="alert-number">37</h2>
+
+        <p class="alert-text">
+          Requires review
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- INSIGHTS -->
+
+    <section class="dashboard-grid">
+
+      <div class="panel chart-panel">
+
+        <div class="panel-header">
+
+          <div>
+            <h3>Medication Price Movement</h3>
+            <p>Average indexed price observations</p>
+          </div>
+
+          <select>
+            <option>Last 6 months</option>
+            <option>Last 12 months</option>
+          </select>
+
+        </div>
+
+
+        <div class="chart">
+
+          <div class="chart-bars">
+
+            <div class="bar" style="height: 38%">
+              <span>₦</span>
+            </div>
+
+            <div class="bar" style="height: 48%">
+              <span></span>
+            </div>
+
+            <div class="bar" style="height: 42%">
+              <span></span>
+            </div>
+
+            <div class="bar" style="height: 65%">
+              <span></span>
+            </div>
+
+            <div class="bar" style="height: 72%">
+              <span></span>
+            </div>
+
+            <div class="bar" style="height: 86%">
+              <span></span>
+            </div>
+
+          </div>
+
+          <div class="chart-labels">
+            <span>Apr</span>
+            <span>May</span>
+            <span>Jun</span>
+            <span>Jul</span>
+            <span>Aug</span>
+            <span>Sep</span>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- PRICE VARIATION -->
+
+      <div class="panel variation-panel">
+
+        <div class="panel-header">
+
+          <div>
+            <h3>Cost Variation</h3>
+            <p>Across tracked pharmacy observations</p>
+          </div>
+
+        </div>
+
+        <div class="variation-content">
+
+          <div class="variation-number">
+            34.7%
+          </div>
+
+          <p>
+            Average observed price variation between
+            lowest and highest comparable records.
+          </p>
+
+          <div class="variation-bar">
+
+            <div class="variation-fill"></div>
+
+          </div>
+
+          <div class="variation-scale">
+            <span>Low</span>
+            <span>High</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- BOTTOM GRID -->
+
+    <section class="bottom-grid">
+
+
+      <!-- HOTSPOTS -->
+
+      <div class="panel hotspots">
+
+        <div class="panel-header">
+
+          <div>
+            <h3>Price Volatility Hotspots</h3>
+            <p>Medicines with significant recent movement</p>
+          </div>
+
+          <span class="view-all">View all →</span>
+
+        </div>
+
+
+        <div class="medicine-row">
+
+          <div class="medicine-info">
+            <div class="medicine-icon">💊</div>
+
+            <div>
+              <strong>Medicine A</strong>
+              <small>Demo record</small>
+            </div>
+          </div>
+
+          <div class="movement high">
+            +28.4%
+          </div>
+
+        </div>
+
+
+        <div class="medicine-row">
+
+          <div class="medicine-info">
+            <div class="medicine-icon">💉</div>
+
+            <div>
+              <strong>Medicine B</strong>
+              <small>Demo record</small>
+            </div>
+          </div>
+
+          <div class="movement medium">
+            +17.2%
+          </div>
+
+        </div>
+
+
+        <div class="medicine-row">
+
+          <div class="medicine-info">
+            <div class="medicine-icon">💊</div>
+
+            <div>
+              <strong>Medicine C</strong>
+              <small>Demo record</small>
+            </div>
+          </div>
+
+          <div class="movement high">
+            +31.6%
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- ANOMALY -->
+
+      <div class="panel anomaly">
+
+        <div class="panel-header">
+
+          <div>
+            <h3>Price Anomaly Detection</h3>
+            <p>Records requiring verification</p>
+          </div>
+
+          <div class="alert-badge">
+            37 Alerts
+          </div>
+
+        </div>
+
+
+        <div class="anomaly-box">
+
+          <div class="warning-icon">
+            ⚠
+          </div>
+
+          <div>
+
+            <strong>Unusual price observation detected</strong>
+
+            <p>
+              A submitted price significantly differs
+              from comparable recent observations.
+            </p>
+
+            <button>
+              Review Record →
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <footer class="dash-footer">
+
+      <span>MedPrice Intelligence © 2026</span>
+
+      <span>Demo environment • Illustrative data only</span>
+
+    </footer>
+
+  </main>
+
+</div>
+
+</body>
+  </html>
