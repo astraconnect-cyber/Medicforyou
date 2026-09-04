@@ -439,18 +439,39 @@ body {
 
       <label for="prescriptionImage" class="upload-button">
         Open Camera / Upload
-      </label>
+      <div class="upload-options">
 
-      <input
-        type="file"
-        id="prescriptionImage"
-        accept="image/*"
-        capture="environment"
-      >
+  <label for="cameraInput" class="upload-button">
+    📷 Take Photo
+  </label>
 
-    </div>
+  <label for="fileInput" class="file-button">
+    🖼️ Choose From Gallery / Files
+  </label>
 
-    <p class="security-note">
+</div>
+
+
+<!-- CAMERA -->
+
+<input
+  type="file"
+  id="cameraInput"
+  accept="image/*"
+  capture="environment"
+  style="display:none"
+>
+
+
+<!-- GALLERY / FILES -->
+
+<input
+  type="file"
+  id="fileInput"
+  accept="image/*"
+  style="display:none"
+>
+        a<p class="security-note">
       🔒 Do not upload prescriptions containing information you are not authorized to share.
     </p>
 
