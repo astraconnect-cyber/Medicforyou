@@ -338,10 +338,42 @@ alert(
 return;
 
 }
+/* SAVE MEDICINES */
 
-window.location.href = 
-  "price-report.html";
-  
+const medicineData = [];
+
+const rows = document.querySelectorAll(".medicine-input-row");
+
+rows.forEach(function(row) {
+
+  const name = row.querySelector(".medicineName").value.trim();
+  const strength = row.querySelector(".strength").value.trim();
+  const quantity = row.querySelector(".quantity").value.trim();
+
+  if (name !== "") {
+
+    medicineData.push({
+      name: name,
+      strength: strength || "Not specified",
+      quantity: quantity || "1"
+    });
+
+  }
+
+});
+
+
+/* STORE DATA */
+
+localStorage.setItem(
+  "medpriceMedicines",
+  JSON.stringify(medicineData)
+);
+
+
+/* GO TO REPORT */
+
+window.location.href = "price-report.html";
 }
 
 </script>
