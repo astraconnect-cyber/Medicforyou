@@ -24,8 +24,6 @@ body {
   margin: auto;
 }
 
-/* HEADER */
-
 .report-header {
   display: flex;
   justify-content: space-between;
@@ -52,8 +50,6 @@ body {
   font-weight: bold;
 }
 
-/* WARNING */
-
 .demo-notice {
   background: #fff8e8;
   border: 1px solid #f1dfac;
@@ -64,8 +60,6 @@ body {
   font-size: 13px;
   line-height: 1.5;
 }
-
-/* SUMMARY */
 
 .summary-grid {
   display: grid;
@@ -93,11 +87,6 @@ body {
   margin: 12px 0 8px;
 }
 
-.summary-card p {
-  color: #7c8983;
-  font-size: 12px;
-}
-
 .lowest h2 {
   color: #00a86b;
 }
@@ -105,8 +94,6 @@ body {
 .highest h2 {
   color: #d85d4b;
 }
-
-/* SAVINGS */
 
 .savings-card {
   background: #071a14;
@@ -139,8 +126,6 @@ body {
 .savings-icon {
   font-size: 55px;
 }
-
-/* COMPARISON */
 
 .comparison-card {
   background: white;
@@ -211,8 +196,6 @@ body {
   font-size: 11px;
 }
 
-/* INSIGHT */
-
 .insight-card {
   margin-top: 25px;
   background: #eaf7f0;
@@ -231,8 +214,6 @@ body {
   line-height: 1.6;
   margin-top: 10px;
 }
-
-/* ACTIONS */
 
 .report-actions {
   display: flex;
@@ -262,8 +243,6 @@ body {
   cursor: pointer;
 }
 
-/* FOOTER */
-
 .report-footer {
   text-align: center;
   color: #98a39e;
@@ -271,8 +250,6 @@ body {
   margin-top: 35px;
   padding-bottom: 20px;
 }
-
-/* MOBILE */
 
 @media(max-width: 700px) {
 
@@ -339,8 +316,6 @@ MedPrice<span>NG</span>
 
 <div class="report-container">
 
-<!-- HEADER -->
-
 <div class="report-header">
 
 <div>
@@ -352,7 +327,7 @@ MEDPRICE INTELLIGENCE REPORT
 <h1>Your Medicine Price Report</h1>
 
 <p>
-Price variation insights based on available medicine records.
+Price comparison based on available database records.
 </p>
 
 </div>
@@ -364,42 +339,35 @@ Price variation insights based on available medicine records.
 </div>
 
 
-<!-- DEMO WARNING -->
-
 <div class="demo-notice">
 
-<strong>Demo Environment:</strong>
-The figures below are illustrative placeholders. They are demonstration estimates, not live pharmacy prices.
+<strong>Price Data Notice:</strong>
+Results are based on available records in the MedPrice database.
+Always verify medicine details and current availability with the pharmacy.
 
 </div>
 
-
-<!-- SUMMARY -->
 
 <section class="summary-grid">
 
 <div class="summary-card">
 
-<small>ESTIMATED LOWEST BASKET</small>
+<small>LOWEST AVAILABLE BASKET</small>
 
-<h2 id="lowestBasket">₦0</h2>
+<h2 id="lowestBasket">Loading...</h2>
 
-<p>
-Lowest illustrative combined estimate.
-</p>
+<p>Combined lowest available prices.</p>
 
 </div>
 
 
 <div class="summary-card highest">
 
-<small>ESTIMATED HIGHEST BASKET</small>
+<small>HIGHEST AVAILABLE BASKET</small>
 
-<h2 id="highestBasket">₦0</h2>
+<h2 id="highestBasket">Loading...</h2>
 
-<p>
-Highest illustrative combined estimate.
-</p>
+<p>Combined highest available prices.</p>
 
 </div>
 
@@ -408,18 +376,14 @@ Highest illustrative combined estimate.
 
 <small>POSSIBLE DIFFERENCE</small>
 
-<h2 id="savingsAmount">₦0</h2>
+<h2 id="savingsAmount">Loading...</h2>
 
-<p>
-Illustrative variation between records.
-</p>
+<p>Difference across available records.</p>
 
 </div>
 
 </section>
 
-
-<!-- SAVINGS -->
 
 <section class="savings-card">
 
@@ -427,23 +391,18 @@ Illustrative variation between records.
 
 <small>POTENTIAL SAVINGS OPPORTUNITY</small>
 
-<h2 id="savingsHeadline">₦0</h2>
+<h2 id="savingsHeadline">Loading...</h2>
 
 <p>
-Comparable medicine prices can vary significantly.
-Always verify the exact medicine, strength and quantity.
+Compare available pharmacy records before making a purchase.
 </p>
 
 </div>
 
-<div class="savings-icon">
-💰
-</div>
+<div class="savings-icon">💰</div>
 
 </section>
 
-
-<!-- COMPARISON -->
 
 <section class="comparison-card">
 
@@ -451,8 +410,8 @@ Always verify the exact medicine, strength and quantity.
 
 <h2>Medicine Price Comparison</h2>
 
-<p>
-Your entered medicines with illustrative price ranges.
+<p id="comparisonStatus">
+Searching available medicine records...
 </p>
 
 </div>
@@ -468,29 +427,21 @@ Your entered medicines with illustrative price ranges.
 </div>
 
 
-<!-- USER MEDICINES WILL APPEAR HERE -->
-
 <div id="medicineResults"></div>
 
 </section>
 
-
-<!-- INSIGHT -->
 
 <section class="insight-card">
 
 <h3>✦ MedPrice Insight</h3>
 
 <p id="insightText">
-
-Enter medicines to generate a demonstration price comparison.
-
+Connecting to price intelligence database...
 </p>
 
 </section>
 
-
-<!-- ACTIONS -->
 
 <div class="report-actions">
 
@@ -508,7 +459,7 @@ Download / Print Report
 
 <div class="report-footer">
 
-MedPrice NG • Price intelligence platform • Demonstration data only
+MedPrice NG • Medicine Price Intelligence Platform
 
 </div>
 
@@ -517,159 +468,325 @@ MedPrice NG • Price intelligence platform • Demonstration data only
 </main>
 
 
-<script>
+<script type="module">
 
-/* GET MEDICINES SAVED FROM MANUAL ENTRY */
+/* =========================
+   FIREBASE IMPORTS
+========================= */
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  query,
+  where
+}
+from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+
+/* =========================
+   YOUR FIREBASE CONFIG
+========================= */
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBO1DD4eeIbZT_0aghdnedH6sl4S8DmXpM",
+  authDomain: "medicineprices-679a8.firebaseapp.com",
+  projectId: "medicineprices-679a8",
+  storageBucket: "medicineprices-679a8.firebasestorage.app",
+  messagingSenderId: "455854753670",
+  appId: "1:455854753670:web:b335fc43343402b0d70e07",
+  measurementId: "G-8NLBL9C8P6"
+};
+
+
+/* =========================
+   INITIALIZE FIREBASE
+========================= */
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+
+/* =========================
+   GET USER MEDICINES
+========================= */
 
 const savedMedicines = JSON.parse(
   localStorage.getItem("medpriceMedicines") || "[]"
 );
 
+
 const resultsContainer =
 document.getElementById("medicineResults");
+
+const comparisonStatus =
+document.getElementById("comparisonStatus");
 
 
 let totalLowest = 0;
 let totalHighest = 0;
 
-
-/* DISPLAY USER MEDICINES */
-
-if (savedMedicines.length > 0) {
-
-  savedMedicines.forEach(function(medicine, index) {
-
-    /*
-      DEMONSTRATION PRICE ENGINE
-      These are NOT real pharmacy prices.
-    */
-
-    const lowest =
-    2500 + (index * 1800);
-
-    const highest =
-    lowest + 3500 + (index * 700);
-
-    const variation =
-    Math.round(
-      ((highest - lowest) / lowest) * 100
-    );
+let medicinesFound = 0;
 
 
-    totalLowest += lowest;
-    totalHighest += highest;
+/* =========================
+   SEARCH FIRESTORE
+========================= */
 
+async function loadMedicinePrices() {
 
-    const row =
-    document.createElement("div");
+  if (savedMedicines.length === 0) {
 
-    row.className = "price-row";
-
-
-    row.innerHTML = `
-
-      <div class="medicine-title">
-
-        ${medicine.name}
-
-        <small>
-          ${medicine.strength || "Strength not specified"}
-          • Quantity ${medicine.quantity || "1"}
-        </small>
-
+    resultsContainer.innerHTML = `
+      <div style="padding:35px;text-align:center;color:#718078;">
+        No medicines found.<br><br>
+        <a href="manual-entry.html"
+        style="color:#00a86b;font-weight:bold;text-decoration:none;">
+        ← Enter Medicines
+        </a>
       </div>
-
-
-      <div class="price-low">
-        ₦${lowest.toLocaleString()}
-      </div>
-
-
-      <div class="price-high">
-        ₦${highest.toLocaleString()}
-      </div>
-
-
-      <div>
-
-        <span class="variation">
-          ${variation}%
-        </span>
-
-      </div>
-
     `;
 
+    comparisonStatus.textContent =
+    "No medicine search was submitted.";
 
-    resultsContainer.appendChild(row);
-
-  });
-
-
-  /* UPDATE SUMMARY */
-
-  const savings =
-  totalHighest - totalLowest;
+    return;
+  }
 
 
-  document.getElementById("lowestBasket")
-  .textContent =
-  "₦" + totalLowest.toLocaleString();
+  try {
+
+    for (const medicine of savedMedicines) {
+
+      const medicineName =
+      medicine.name.trim();
 
 
-  document.getElementById("highestBasket")
-  .textContent =
-  "₦" + totalHighest.toLocaleString();
+      const priceQuery = query(
+        collection(db, "medicinePrices"),
+        where("medicineName", "==", medicineName)
+      );
 
 
-  document.getElementById("savingsAmount")
-  .textContent =
-  "₦" + savings.toLocaleString();
+      const querySnapshot =
+      await getDocs(priceQuery);
 
 
-  document.getElementById("savingsHeadline")
-  .textContent =
-  "Up to ₦" + savings.toLocaleString();
+      const prices = [];
 
 
-  document.getElementById("insightText")
-  .textContent =
-  "Based on the demonstration data, the combined price range for the medicines entered shows a possible difference of ₦" +
-  savings.toLocaleString() +
-  ". Real MedPrice results will use verified medicine and pharmacy price records.";
+      querySnapshot.forEach((doc) => {
+
+        const data = doc.data();
+
+        if (
+          typeof data.price === "number" &&
+          data.verified === true
+        ) {
+
+          prices.push(data.price);
+
+        }
+
+      });
+
+
+      if (prices.length > 0) {
+
+        medicinesFound++;
+
+        const lowest =
+        Math.min(...prices);
+
+        const highest =
+        Math.max(...prices);
+
+        const variation =
+        Math.round(
+          ((highest - lowest) / lowest) * 100
+        );
+
+
+        totalLowest += lowest;
+        totalHighest += highest;
+
+
+        const row =
+        document.createElement("div");
+
+        row.className = "price-row";
+
+
+        row.innerHTML = `
+
+          <div class="medicine-title">
+
+            ${medicineName}
+
+            <small>
+              ${medicine.strength || "Strength not specified"}
+              • Quantity ${medicine.quantity || "1"}
+              • ${prices.length} verified record(s)
+            </small>
+
+          </div>
+
+
+          <div class="price-low">
+            ₦${lowest.toLocaleString()}
+          </div>
+
+
+          <div class="price-high">
+            ₦${highest.toLocaleString()}
+          </div>
+
+
+          <div>
+
+            <span class="variation">
+              ${variation}%
+            </span>
+
+          </div>
+
+        `;
+
+
+        resultsContainer.appendChild(row);
+
+      }
+
+      else {
+
+        const row =
+        document.createElement("div");
+
+        row.className = "price-row";
+
+
+        row.innerHTML = `
+
+          <div class="medicine-title">
+
+            ${medicineName}
+
+            <small>
+              No verified price records found yet.
+            </small>
+
+          </div>
+
+          <div>-</div>
+          <div>-</div>
+
+          <div>
+            <span class="variation">
+              No data
+            </span>
+          </div>
+
+        `;
+
+
+        resultsContainer.appendChild(row);
+
+      }
+
+    }
+
+
+    /* =========================
+       UPDATE TOTALS
+    ========================= */
+
+    if (medicinesFound > 0) {
+
+      const savings =
+      totalHighest - totalLowest;
+
+
+      document.getElementById("lowestBasket")
+      .textContent =
+      "₦" + totalLowest.toLocaleString();
+
+
+      document.getElementById("highestBasket")
+      .textContent =
+      "₦" + totalHighest.toLocaleString();
+
+
+      document.getElementById("savingsAmount")
+      .textContent =
+      "₦" + savings.toLocaleString();
+
+
+      document.getElementById("savingsHeadline")
+      .textContent =
+      "Up to ₦" + savings.toLocaleString();
+
+
+      comparisonStatus.textContent =
+      medicinesFound +
+      " medicine(s) matched against verified database records.";
+
+
+      document.getElementById("insightText")
+      .textContent =
+      "MedPrice found " +
+      medicinesFound +
+      " medicine(s) with verified price records. The difference between the lowest and highest available combined prices is ₦" +
+      savings.toLocaleString() +
+      ".";
+
+    }
+
+    else {
+
+      comparisonStatus.textContent =
+      "No matching verified medicine prices were found.";
+
+      document.getElementById("lowestBasket")
+      .textContent = "No data";
+
+      document.getElementById("highestBasket")
+      .textContent = "No data";
+
+      document.getElementById("savingsAmount")
+      .textContent = "No data";
+
+      document.getElementById("savingsHeadline")
+      .textContent = "No data";
+
+    }
+
+  }
+
+  catch (error) {
+
+    console.error(error);
+
+    comparisonStatus.textContent =
+    "Unable to load price records.";
+
+    resultsContainer.innerHTML = `
+      <div style="padding:30px;color:#d85d4b;">
+        Error connecting to the MedPrice database.
+      </div>
+    `;
+
+  }
 
 }
 
-else {
 
-  resultsContainer.innerHTML = `
+/* START SEARCH */
 
-    <div style="
-      padding:35px;
-      text-align:center;
-      color:#718078;
-    ">
-
-      No medicines found.
-
-      <br><br>
-
-      <a href="manual-entry.html"
-      style="
-        color:#00a86b;
-        font-weight:bold;
-        text-decoration:none;
-      ">
-
-        ← Enter Medicines
-
-      </a>
-
-    </div>
-
-  `;
-
-}
+loadMedicinePrices();
 
 </script>
 
