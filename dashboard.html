@@ -62,7 +62,7 @@
       <div class="system-status">
         <span class="status-dot"></span>
         Intelligence Engine
-        <small>Demo Environment</small>
+        <small id="systemStatus">Connecting...</small>
       </div>
 
       <a href="index.html" class="back-home">
@@ -87,12 +87,12 @@
         <h1>Market Intelligence</h1>
 
         <p class="subtitle">
-          Medication affordability and price variation insights.
+          Live medication affordability and price variation insights.
         </p>
       </div>
 
       <div class="profile">
-        <div class="demo-badge">DEMO</div>
+        <div class="demo-badge">LIVE DATA</div>
         <div class="avatar">MP</div>
       </div>
 
@@ -106,14 +106,14 @@
       <div class="stat-card">
 
         <div class="stat-label">
-          PRESCRIPTIONS ANALYZED
+          PRICE RECORDS
           <span>↗</span>
         </div>
 
-        <h2>12,847</h2>
+        <h2 id="totalRecords">...</h2>
 
         <p class="positive">
-          ↑ 18.4% <span>vs previous period</span>
+          <span>Available database records</span>
         </p>
 
       </div>
@@ -126,10 +126,10 @@
           <span>◈</span>
         </div>
 
-        <h2>2,431</h2>
+        <h2 id="medicinesTracked">...</h2>
 
         <p class="neutral">
-          Across verified records
+          Unique medicines in database
         </p>
 
       </div>
@@ -138,14 +138,14 @@
       <div class="stat-card">
 
         <div class="stat-label">
-          PRICE OBSERVATIONS
+          VERIFIED RECORDS
           <span>◉</span>
         </div>
 
-        <h2>48,291</h2>
+        <h2 id="verifiedRecords">...</h2>
 
         <p class="positive">
-          ↑ 6.8% <span>new observations</span>
+          <span>Verified pharmacy observations</span>
         </p>
 
       </div>
@@ -154,14 +154,14 @@
       <div class="stat-card">
 
         <div class="stat-label">
-          ACTIVE PRICE ALERTS
+          PRICE ALERTS
           <span>⚠</span>
         </div>
 
-        <h2 class="alert-number">37</h2>
+        <h2 class="alert-number" id="priceAlerts">...</h2>
 
         <p class="alert-text">
-          Requires review
+          High variation detected
         </p>
 
       </div>
@@ -179,12 +179,11 @@
 
           <div>
             <h3>Medication Price Movement</h3>
-            <p>Average indexed price observations</p>
+            <p>Available price observations</p>
           </div>
 
           <select>
-            <option>Last 6 months</option>
-            <option>Last 12 months</option>
+            <option>Database records</option>
           </select>
 
         </div>
@@ -192,41 +191,16 @@
 
         <div class="chart">
 
-          <div class="chart-bars">
+          <div class="chart-bars" id="chartBars">
 
-            <div class="bar" style="height: 38%">
-              <span>₦</span>
-            </div>
-
-            <div class="bar" style="height: 48%">
-              <span></span>
-            </div>
-
-            <div class="bar" style="height: 42%">
-              <span></span>
-            </div>
-
-            <div class="bar" style="height: 65%">
-              <span></span>
-            </div>
-
-            <div class="bar" style="height: 72%">
-              <span></span>
-            </div>
-
-            <div class="bar" style="height: 86%">
+            <div class="bar" style="height: 10%">
               <span></span>
             </div>
 
           </div>
 
-          <div class="chart-labels">
-            <span>Apr</span>
-            <span>May</span>
-            <span>Jun</span>
-            <span>Jul</span>
-            <span>Aug</span>
-            <span>Sep</span>
+          <div class="chart-labels" id="chartLabels">
+            <span>Loading</span>
           </div>
 
         </div>
@@ -242,25 +216,24 @@
 
           <div>
             <h3>Cost Variation</h3>
-            <p>Across tracked pharmacy observations</p>
+            <p>Across comparable medicine records</p>
           </div>
 
         </div>
 
         <div class="variation-content">
 
-          <div class="variation-number">
-            34.7%
+          <div class="variation-number" id="variationNumber">
+            ...
           </div>
 
-          <p>
-            Average observed price variation between
-            lowest and highest comparable records.
+          <p id="variationDescription">
+            Calculating price variation from database records.
           </p>
 
           <div class="variation-bar">
 
-            <div class="variation-fill"></div>
+            <div class="variation-fill" id="variationFill"></div>
 
           </div>
 
@@ -289,63 +262,31 @@
 
           <div>
             <h3>Price Volatility Hotspots</h3>
-            <p>Medicines with significant recent movement</p>
+            <p>Medicines with highest observed variation</p>
           </div>
 
-          <span class="view-all">View all →</span>
+          <span class="view-all">
+            Live →
+          </span>
 
         </div>
 
 
-        <div class="medicine-row">
+        <div id="hotspotsContainer">
 
-          <div class="medicine-info">
-            <div class="medicine-icon">💊</div>
+          <div class="medicine-row">
 
-            <div>
-              <strong>Medicine A</strong>
-              <small>Demo record</small>
+            <div class="medicine-info">
+
+              <div class="medicine-icon">💊</div>
+
+              <div>
+                <strong>Loading...</strong>
+                <small>Checking database</small>
+              </div>
+
             </div>
-          </div>
 
-          <div class="movement high">
-            +28.4%
-          </div>
-
-        </div>
-
-
-        <div class="medicine-row">
-
-          <div class="medicine-info">
-            <div class="medicine-icon">💉</div>
-
-            <div>
-              <strong>Medicine B</strong>
-              <small>Demo record</small>
-            </div>
-          </div>
-
-          <div class="movement medium">
-            +17.2%
-          </div>
-
-        </div>
-
-
-        <div class="medicine-row">
-
-          <div class="medicine-info">
-            <div class="medicine-icon">💊</div>
-
-            <div>
-              <strong>Medicine C</strong>
-              <small>Demo record</small>
-            </div>
-          </div>
-
-          <div class="movement high">
-            +31.6%
           </div>
 
         </div>
@@ -364,8 +305,8 @@
             <p>Records requiring verification</p>
           </div>
 
-          <div class="alert-badge">
-            37 Alerts
+          <div class="alert-badge" id="alertBadge">
+            Loading
           </div>
 
         </div>
@@ -379,15 +320,16 @@
 
           <div>
 
-            <strong>Unusual price observation detected</strong>
+            <strong id="anomalyTitle">
+              Checking price records
+            </strong>
 
-            <p>
-              A submitted price significantly differs
-              from comparable recent observations.
+            <p id="anomalyText">
+              MedPrice is analyzing available pharmacy price records.
             </p>
 
-            <button>
-              Review Record →
+            <button onclick="location.href='check-price.html'">
+              Check Medicine →
             </button>
 
           </div>
@@ -403,7 +345,9 @@
 
       <span>MedPrice Intelligence © 2026</span>
 
-      <span>Demo environment • Illustrative data only</span>
+      <span id="footerStatus">
+        Connecting to medicine database...
+      </span>
 
     </footer>
 
@@ -411,5 +355,572 @@
 
 </div>
 
+
+<!-- FIREBASE + INTELLIGENCE ENGINE -->
+
+<script type="module">
+
+/* =========================
+   FIREBASE IMPORTS
+========================= */
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+import {
+  getFirestore,
+  collection,
+  getDocs
+}
+from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+
+/* =========================
+   FIREBASE CONFIG
+========================= */
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBO1DD4eeIbZT_0aghdnedH6sl4S8DmXpM",
+  authDomain: "medicineprices-679a8.firebaseapp.com",
+  projectId: "medicineprices-679a8",
+  storageBucket: "medicineprices-679a8.firebasestorage.app",
+  messagingSenderId: "455854753670",
+  appId: "1:455854753670:web:b335fc43343402b0d70e07",
+  measurementId: "G-8NLBL9C8P6"
+};
+
+
+/* =========================
+   INITIALIZE FIREBASE
+========================= */
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+
+/* =========================
+   LOAD MEDICINE DATA
+========================= */
+
+async function loadDashboard() {
+
+  try {
+
+    const snapshot = await getDocs(
+      collection(db, "medicinePrices")
+    );
+
+
+    const records = [];
+
+
+    snapshot.forEach((doc) => {
+
+      const data = doc.data();
+
+      records.push({
+        id: doc.id,
+        ...data
+      });
+
+    });
+
+
+    console.log("MedPrice records:", records);
+
+
+    /* =========================
+       BASIC STATISTICS
+    ========================= */
+
+    const totalRecords = records.length;
+
+
+    const verifiedRecords =
+    records.filter(record =>
+      record.verified === true
+    );
+
+
+    const medicineNames = new Set();
+
+    records.forEach(record => {
+
+      if (record.medicineName) {
+
+        medicineNames.add(
+          record.medicineName
+            .toString()
+            .trim()
+            .toLowerCase()
+        );
+
+      }
+
+    });
+
+
+    document.getElementById("totalRecords")
+    .textContent =
+    totalRecords.toLocaleString();
+
+
+    document.getElementById("medicinesTracked")
+    .textContent =
+    medicineNames.size.toLocaleString();
+
+
+    document.getElementById("verifiedRecords")
+    .textContent =
+    verifiedRecords.length.toLocaleString();
+
+
+
+    /* =========================
+       GROUP RECORDS BY MEDICINE
+    ========================= */
+
+    const medicineGroups = {};
+
+
+    verifiedRecords.forEach(record => {
+
+      if (
+        !record.medicineName ||
+        typeof record.price !== "number"
+      ) return;
+
+
+      const name =
+      record.medicineName
+      .toString()
+      .trim();
+
+
+      if (!medicineGroups[name]) {
+
+        medicineGroups[name] = [];
+
+      }
+
+
+      medicineGroups[name].push(
+        record.price
+      );
+
+    });
+
+
+
+    /* =========================
+       CALCULATE VARIATIONS
+    ========================= */
+
+    const variations = [];
+
+
+    Object.keys(medicineGroups)
+    .forEach(name => {
+
+      const prices =
+      medicineGroups[name];
+
+
+      if (prices.length >= 1) {
+
+        const lowest =
+        Math.min(...prices);
+
+
+        const highest =
+        Math.max(...prices);
+
+
+        let variation = 0;
+
+
+        if (lowest > 0) {
+
+          variation =
+          ((highest - lowest) / lowest) * 100;
+
+        }
+
+
+        variations.push({
+
+          name,
+          lowest,
+          highest,
+          variation,
+          records: prices.length
+
+        });
+
+      }
+
+    });
+
+
+
+    /* =========================
+       AVERAGE VARIATION
+    ========================= */
+
+    let averageVariation = 0;
+
+
+    if (variations.length > 0) {
+
+      averageVariation =
+      variations.reduce(
+        (total, item) =>
+        total + item.variation,
+        0
+      ) / variations.length;
+
+    }
+
+
+    document.getElementById("variationNumber")
+    .textContent =
+    averageVariation.toFixed(1) + "%";
+
+
+    document.getElementById("variationDescription")
+    .textContent =
+    variations.length > 0
+    ? "Average observed price variation calculated from available verified medicine records."
+    : "More comparable price records are needed to calculate variation.";
+
+
+    document.getElementById("variationFill")
+    .style.width =
+    Math.min(averageVariation, 100) + "%";
+
+
+
+    /* =========================
+       PRICE ALERTS
+    ========================= */
+
+    const alerts =
+    variations.filter(item =>
+      item.variation >= 20
+    );
+
+
+    document.getElementById("priceAlerts")
+    .textContent =
+    alerts.length;
+
+
+    document.getElementById("alertBadge")
+    .textContent =
+    alerts.length + " Alert" +
+    (alerts.length !== 1 ? "s" : "");
+
+
+
+    /* =========================
+       HOTSPOTS
+    ========================= */
+
+    variations.sort(
+      (a, b) =>
+      b.variation - a.variation
+    );
+
+
+    const hotspots =
+    variations.slice(0, 3);
+
+
+    const hotspotsContainer =
+    document.getElementById(
+      "hotspotsContainer"
+    );
+
+
+    hotspotsContainer.innerHTML = "";
+
+
+    if (hotspots.length === 0) {
+
+      hotspotsContainer.innerHTML = `
+
+        <div class="medicine-row">
+
+          <div class="medicine-info">
+
+            <div class="medicine-icon">💊</div>
+
+            <div>
+
+              <strong>No comparison data yet</strong>
+
+              <small>
+                Add more verified prices for the same medicine.
+              </small>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      `;
+
+    }
+
+
+    hotspots.forEach(item => {
+
+      const row =
+      document.createElement("div");
+
+
+      row.className =
+      "medicine-row";
+
+
+      row.innerHTML = `
+
+        <div class="medicine-info">
+
+          <div class="medicine-icon">
+            💊
+          </div>
+
+          <div>
+
+            <strong>
+              ${item.name}
+            </strong>
+
+            <small>
+              ₦${item.lowest.toLocaleString()}
+              -
+              ₦${item.highest.toLocaleString()}
+              • ${item.records} record(s)
+            </small>
+
+          </div>
+
+        </div>
+
+
+        <div class="movement high">
+
+          +${item.variation.toFixed(1)}%
+
+        </div>
+
+      `;
+
+
+      hotspotsContainer.appendChild(row);
+
+    });
+
+
+
+    /* =========================
+       SIMPLE CHART
+    ========================= */
+
+    const chartBars =
+    document.getElementById(
+      "chartBars"
+    );
+
+
+    const chartLabels =
+    document.getElementById(
+      "chartLabels"
+    );
+
+
+    chartBars.innerHTML = "";
+    chartLabels.innerHTML = "";
+
+
+    const chartData =
+    variations.slice(0, 6);
+
+
+    if (chartData.length === 0) {
+
+      chartBars.innerHTML = `
+        <div style="
+          padding:40px;
+          color:#888;
+          text-align:center;
+        ">
+          Not enough verified price data yet
+        </div>
+      `;
+
+    }
+
+
+    const maxVariation =
+    Math.max(
+      ...chartData.map(
+        item => item.variation
+      ),
+      1
+    );
+
+
+    chartData.forEach(item => {
+
+      const height =
+      Math.max(
+        (item.variation /
+        maxVariation) * 90,
+        10
+      );
+
+
+      const bar =
+      document.createElement("div");
+
+
+      bar.className = "bar";
+
+
+      bar.style.height =
+      height + "%";
+
+
+      bar.title =
+      item.name +
+      ": " +
+      item.variation.toFixed(1) +
+      "% variation";
+
+
+      bar.innerHTML =
+      "<span></span>";
+
+
+      chartBars.appendChild(bar);
+
+
+      const label =
+      document.createElement("span");
+
+
+      label.textContent =
+      item.name.length > 8
+      ? item.name.substring(0, 8) + "…"
+      : item.name;
+
+
+      chartLabels.appendChild(label);
+
+    });
+
+
+
+    /* =========================
+       ANOMALY SECTION
+    ========================= */
+
+    if (alerts.length > 0) {
+
+      const highestAlert =
+      alerts[0];
+
+
+      document.getElementById("anomalyTitle")
+      .textContent =
+      "High price variation detected";
+
+
+      document.getElementById("anomalyText")
+      .textContent =
+      highestAlert.name +
+      " shows a " +
+      highestAlert.variation.toFixed(1) +
+      "% difference between the lowest and highest verified recorded prices.";
+
+    }
+
+    else {
+
+      document.getElementById("anomalyTitle")
+      .textContent =
+      "No major price anomalies detected";
+
+
+      document.getElementById("anomalyText")
+      .textContent =
+      "The current verified database records do not show significant price variation.";
+
+    }
+
+
+
+    /* =========================
+       STATUS
+    ========================= */
+
+    document.getElementById("systemStatus")
+    .textContent =
+    "Database connected";
+
+
+    document.getElementById("footerStatus")
+    .textContent =
+    totalRecords +
+    " live database record(s) loaded";
+
+
+  }
+
+
+  catch (error) {
+
+    console.error(
+      "Dashboard Error:",
+      error
+    );
+
+
+    document.getElementById("systemStatus")
+    .textContent =
+    "Connection error";
+
+
+    document.getElementById("footerStatus")
+    .textContent =
+    "Unable to connect to database";
+
+
+    document.getElementById("anomalyTitle")
+    .textContent =
+    "Database connection error";
+
+
+    document.getElementById("anomalyText")
+    .textContent =
+    error.message;
+
+  }
+
+}
+
+
+/* =========================
+   START DASHBOARD
+========================= */
+
+loadDashboard();
+
+</script>
+
 </body>
-  </html>
+          </html>
